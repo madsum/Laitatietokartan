@@ -48,20 +48,32 @@ public class NoteList extends ListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.notelist_menu, menu);
+		getMenuInflater().inflate(R.menu.notes_list, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.new_note:
-			createNote();
-			return true;
-
+	switch (item.getItemId()) {
+		
+		case R.id.location_found:
+			startCurrentMap();
+			break;
 		default:
 			return super.onOptionsItemSelected(item);
+		
+		
 		}
+	return true;
+	}
+	
+	private void startCurrentMap()
+	{
+		Intent intent = new Intent(this, MapActivity.class);
+		Bundle b = new Bundle();
+		b.putBoolean("bool", true);
+		intent.putExtras(b);
+		startActivity(intent);		
 	}
 
 	private void createNote() {
@@ -73,19 +85,13 @@ public class NoteList extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		
-		/*
-		Intent i = new Intent(this, NoteEdit.class);
-		i.putExtra(NotesDbAdapter.KEY_ROWID, id);
-		startActivityForResult(i, ACTIVITY_EDIT);
-		*/
-		
 		LatLng ll = mDbHelper.getLatLon(id);
-		mDbHelper.fillData();
 		
 		if( ll != null)
 		{	
 			Intent intent = new Intent(this, MapActivity.class);
 			Bundle b = new Bundle();
+			b.putBoolean("bool", false);
 			b.putDouble("lat", ll.latitude);
 			b.putDouble("lon", ll.longitude);
 			intent.putExtras(b);

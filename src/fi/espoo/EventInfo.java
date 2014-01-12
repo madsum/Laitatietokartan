@@ -8,10 +8,11 @@ public class EventInfo {
 	private String title;
 	private String details;
 
-	public EventInfo(LatLng aposition, String ainfo)
+	public EventInfo(LatLng aPosition, String aInfo, String aDetails)
 	{
-		position = aposition;
-		title = ainfo;
+		position = aPosition;
+		title = aInfo;
+		details = aDetails;
 	}
 	
 	public EventInfo()

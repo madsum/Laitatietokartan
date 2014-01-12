@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+ <item android:id="@+id/location_found"
+          android:icon="@drawable/location_found"
+          android:title="@string/nykyinen_sijainti"
+          android:showAsAction="ifRoom"/>
+ 
+
+  <item android:id="@+id/all_marker"
+          android:icon="@drawable/ic_action_select_all"
+          android:title="@string/kaikki sijainti"
+          android:showAsAction="ifRoom"/>
+
+<item android:id="@+id/edit"
+          android:icon="@drawable/edit"
+          android:title="@string/uutta_tietoa"
+          android:showAsAction="ifRoom"/>
+
+<item android:id="@+id/all_note"
+          android:icon="@drawable/ic_action_view_as_list"
+          android:title="@string/kaikki_tieto"
+          android:showAsAction="ifRoom"/>
+
+</menu>

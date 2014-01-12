@@ -289,19 +289,23 @@ public class NotesDbAdapter {
 
 		LatLng ll = null;
 		String title = null;
+		String details = null;
+		boolean loop = false;
 
 		if (cursor == null) {
 			return;
 		}
 
 		if (cursor != null) {
-			cursor.moveToFirst();
+			loop = cursor.moveToFirst();
 		}
 
-		while (cursor.moveToNext()) {
+		while (loop) {
 			try {
 				title = (cursor.getString(cursor
 						.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE)));
+				details = (cursor.getString(cursor
+						.getColumnIndexOrThrow(NotesDbAdapter.KEY_BODY)));
 				String lat = cursor.getString(cursor
 						.getColumnIndexOrThrow(NotesDbAdapter.KEY_LAT));
 				String lon = (cursor.getString(cursor
@@ -312,12 +316,13 @@ public class NotesDbAdapter {
 					double dlon = Double.parseDouble(lon);
 					ll = new LatLng(dlat, dlon);
 					// when we got ll we must add to container
-					EventInfo eventInfo = new EventInfo(ll, title);
+					EventInfo eventInfo = new EventInfo(ll, title, details);
 					allEventInfo.add(eventInfo);
 				}
 			} catch (Exception ex) {
 				Log.d("Masum", ex.getMessage());
 			}
+			loop = cursor.moveToNext();
 		}
 	}
 

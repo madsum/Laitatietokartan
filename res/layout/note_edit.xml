@@ -17,13 +17,13 @@
 		<TextView android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="18sp" 
-			android:text="otsikko: "
+			android:text="Otsikko: "
 			android:id="@+id/title_text1" />					
 		
 		<EditText android:id="@+id/title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textSize="18sp"    
+			android:textSize="18sp"   
 		    android:hint="ei otsikkoa"
 		    android:layout_toRightOf="@+id/title_text1" 
 		    android:background="@android:color/transparent" 	

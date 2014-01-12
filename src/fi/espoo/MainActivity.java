@@ -21,11 +21,11 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	
 
-	List<Address> currn_addresses = null;
+	//List<Address> currn_addresses = null;
 	//double latitude;
 	//double longitude;
-	LatLng position;
-	LocationInfo lacationInfo;
+	//LatLng position;
+	//LocationInfo lacationInfo;
 	//Location location;
 	
 
@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
         LocationLibrary.initialiseLibrary(getBaseContext(), 60 * 1000, 2 * 60 * 1000, "mobi.littlefluffytoys.littlefluffytestclient");
-        lacationInfo = (new LocationInfo(this));	
+      //  lacationInfo = (new LocationInfo(this));	
         
         Button on_map = (Button)findViewById(R.id.curr_map);
         on_map.setOnClickListener(new View.OnClickListener() {
@@ -81,8 +81,9 @@ public class MainActivity extends Activity {
 	{
 		Intent intent = new Intent(MainActivity.this, MapActivity.class);
 		Bundle b = new Bundle();
-		b.putDouble("lat", position.latitude);
-		b.putDouble("lon", position.longitude);
+		//b.putDouble("lat", position.latitude);
+		//b.putDouble("lon", position.longitude);
+		 b.putBoolean("bool", true);
 		intent.putExtras(b);
 		startActivity(intent);
 	}
@@ -113,10 +114,10 @@ public class MainActivity extends Activity {
 	        super.onResume();
 	        // cancel any notification we may have received from TestBroadcastReceiver
 	        //((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(1234);
-	        refreshDisplay();
+	        //refreshDisplay();
 	 }
 	
-	
+	/*
     private void refreshDisplay() {
     	refreshDisplay(new LocationInfo(this));
     }
@@ -155,4 +156,5 @@ public class MainActivity extends Activity {
     	}
     	
     }
+    */
 }
