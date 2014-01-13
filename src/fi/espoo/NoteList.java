@@ -23,12 +23,10 @@ public class NoteList extends ListActivity {
 
 	private static final int ACTIVITY_CREATE = 0;
 	private static final int ACTIVITY_EDIT = 1;
-
 	private static final int MAP_ID = Menu.FIRST;
 	private static final int EDIT_ID = MAP_ID+1;
 	private static final int DELETE_ID = MAP_ID+2;
 	private int mNoteNumber = 1;
-
 	private NotesDbAdapter mDbHelper;
 
 	@Override
@@ -39,7 +37,6 @@ public class NoteList extends ListActivity {
 		mDbHelper.open();
 		fillData();
 		registerForContextMenu(getListView());
-
 		// get action bar
 		ActionBar actionBar = getActionBar();
 		// Enabling Up / Back navigation
@@ -61,8 +58,6 @@ public class NoteList extends ListActivity {
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
-		
-		
 		}
 	return true;
 	}
@@ -88,18 +83,13 @@ public class NoteList extends ListActivity {
 		LatLng ll = mDbHelper.getLatLon(id);
 		
 		if( ll != null)
-		{	
-			Intent intent = new Intent(this, MapActivity.class);
-			Bundle b = new Bundle();
-			b.putBoolean("bool", false);
-			b.putDouble("lat", ll.latitude);
-			b.putDouble("lon", ll.longitude);
-			intent.putExtras(b);
-			startActivity(intent);
+		{
+			// start selected map
+			showSelectedMap(id);
 		}
 	}
 	
-	private void showMap(long id)
+	private void showSelectedMap(long id)
 	{
 		LatLng ll = mDbHelper.getLatLon(id);
 		if( ll != null)
@@ -151,7 +141,7 @@ public class NoteList extends ListActivity {
 				.getMenuInfo();
 		switch (item.getItemId()) {
 		case MAP_ID:
-			showMap(info.id);
+			showSelectedMap(info.id);
 			break;
 			
 		case EDIT_ID:

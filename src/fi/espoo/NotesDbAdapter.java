@@ -24,41 +24,19 @@ public class NotesDbAdapter {
 	public static final String KEY_LAT = "lat";
 	public static final String KEY_LNG = "lng";
 
-	/*
-	 * public static final String KEY_BODY = "body"; public static final String
-	 * KEY_TITLE = "title"; public static final String KEY_DATE = "date"; public
-	 * static final String KEY_DETAILS = "details"; public static final String
-	 * KEY_ROWID = "id"; public static final String KEY_LAT = "lat"; public
-	 * static final String KEY_LON = "lat";
-	 */
 	private static final String TAG = "NotesDbAdapter";
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb;
 	private LocationInfo lacationInfo;
 
-	/**
-	 * Database creation sql statement
-	 */
-
+	
+	// Database creation sql statement	 
 	private static final String DATABASE_CREATE = "create table notes (_id integer primary key autoincrement, "
 			+ "title text not null, body text not null, date text not null, lat text not null, lng text not null);";
 
-	/*
-	 * private static final String DATABASE_CREATE2 ="CREATE TABLE `markers` ("
-	 * + "`id` integer primary key autoincrement, "+
-	 * "`title` VARCHAR( 60 ) NOT NULL ,"+ "`details` VARCHAR( 80 ),"+
-	 * "`date` text, "+ " `lat` FLOAT( 10, 6 ),"+ "`lng` FLOAT( 10, 6 ))";
-	 */
-	/*
-	 * private static final String DATABASE_CREATE3 ="CREATE TABLE markers (" +
-	 * "id integer primary key autoincrement, "+
-	 * "title VARCHAR( 60 ) NOT NULL ,"+ "details VARCHAR( 80 ),"+
-	 * "date text, "+ "lat FLOAT( 10, 6 ),"+ "lng FLOAT( 10, 6 ))";
-	 */
 
 	private static final String DATABASE_NAME = "data";
 	private static final String DATABASE_TABLE = "notes";
-	// private static final String DATABASE_TABLE2 = "markers";
 	private static final int DATABASE_VERSION = 2;
 
 	private final Context mCtx;
@@ -73,7 +51,6 @@ public class NotesDbAdapter {
 		public void onCreate(SQLiteDatabase db) {
 
 			try {
-				// db.execSQL(DATABASE_CREATE3);
 				db.execSQL(DATABASE_CREATE);
 			} catch (SQLException ex) {
 				Log.d("TAG", ex.getMessage());
@@ -85,7 +62,6 @@ public class NotesDbAdapter {
 			Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
 					+ newVersion + ", which will destroy all old data");
 			db.execSQL("DROP TABLE IF EXISTS notes");
-			// db.execSQL("DROP TABLE IF EXISTS markers");
 			onCreate(db);
 		}
 	}
@@ -132,48 +108,26 @@ public class NotesDbAdapter {
 	 *            the body of the note
 	 * @return rowId or -1 if failed
 	 */
-	public long createNote(String title, String body, String date, String lat,
-			String lon) {
-		// ContentValues initialValues = new ContentValues();
+	public long createNote(String title, String body, String date, String lat, String lon) 
+	{
 		ContentValues initialValues2 = new ContentValues();
-
-		// INSERT INTO `markers` (`name`, `address`, `lat`, `lng`) VALUES
-		// ('Frankie Johnnie & Luigo Too','939 W El Camino Real, Mountain View,
-		// CA','37.386339','-122.085823');
-		/*
-		 * initialValues.put(KEY_TITLE, title); initialValues.put(KEY_DETAILS,
-		 * body); initialValues.put(KEY_DATE, date); initialValues.put(KEY_LAT,
-		 * lat); initialValues.put(KEY_LON, lon);
-		 */
+		long ret = 0;
 		initialValues2.put(KEY_TITLE, title);
 		initialValues2.put(KEY_BODY, body);
 		initialValues2.put(KEY_DATE, date);
 		initialValues2.put(KEY_LAT, lat);
 		initialValues2.put(KEY_LNG, lon);
 
-		long ret = 0;
-		long ret2 = 0;
-
-		try {
+		try 
+		{
 			ret = mDb.insert(DATABASE_TABLE, null, initialValues2);
-			// ret2 = mDb.insert(DATABASE_TABLE3, null, initialValues2);
-		} catch (Exception ex) {
-			Log.d("asfasf", ex.getMessage());
+		} 
+		catch (Exception ex) 
+		{
+			Log.d("error: ", ex.getMessage());
 		}
-		return ret;
-
-		// return mDb.insert(DATABASE_TABLE, null, initialValues);
+		return ret; 
 	}
-
-	public long createNote2(String title, String body, String date) {
-		ContentValues initialValues = new ContentValues();
-		initialValues.put(KEY_TITLE, title);
-		initialValues.put(KEY_BODY, body);
-		initialValues.put(KEY_DATE, date);
-
-		return mDb.insert(DATABASE_TABLE, null, initialValues);
-	}
-
 	/**
 	 * Delete the note with the given rowId
 	 * 
@@ -182,7 +136,6 @@ public class NotesDbAdapter {
 	 * @return true if deleted, false otherwise
 	 */
 	public boolean deleteNote(long rowId) {
-
 		return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
 	}
 
@@ -218,34 +171,11 @@ public class NotesDbAdapter {
 			mCursor.moveToFirst();
 		}
 		return mCursor;
-
-	}
-
-	public void fillData() {
-		String msg = new String();
-		Cursor notesCursor = fetchAllNotes();
-		// startManagingCursor(notesCursor);
-		int count = 1;
-		while (notesCursor.moveToNext()) {
-			String title = notesCursor.getString(notesCursor
-					.getColumnIndex(KEY_TITLE));
-			String body = notesCursor.getString(notesCursor
-					.getColumnIndex(KEY_BODY));
-			String lat = notesCursor.getString(notesCursor
-					.getColumnIndex(KEY_LAT));
-			String lng = notesCursor.getString(notesCursor
-					.getColumnIndex(KEY_LNG));
-			msg += Integer.toString(count) + " " + "otsikko: " + title + " "
-					+ "tiedot: " + body + "Lat: " + lat + "Lng: " + lng + "\n";
-			count++;
-		}
 	}
 
 	public LatLng getLatLon(long rowId) {
 
-		Cursor cursor = mDb.query(true, DATABASE_TABLE, new String[] {
-				KEY_ROWID, KEY_TITLE, KEY_BODY, KEY_DATE, KEY_LAT, KEY_LNG },
-				KEY_ROWID + "=" + rowId, null, null, null, null, null);
+		Cursor cursor = fetchNote(rowId);
 
 		if (cursor != null) {
 			cursor.moveToFirst();
@@ -270,7 +200,6 @@ public class NotesDbAdapter {
 				return null;
 			}
 
-			// return null;
 		} catch (Exception ex) {
 			Log.d("Masum", ex.getMessage());
 			return null;
@@ -290,6 +219,8 @@ public class NotesDbAdapter {
 		LatLng ll = null;
 		String title = null;
 		String details = null;
+		String str_id = null;
+		long id = 0;
 		boolean loop = false;
 
 		if (cursor == null) {
@@ -306,6 +237,9 @@ public class NotesDbAdapter {
 						.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE)));
 				details = (cursor.getString(cursor
 						.getColumnIndexOrThrow(NotesDbAdapter.KEY_BODY)));
+				str_id = (cursor.getString(cursor
+						.getColumnIndexOrThrow(NotesDbAdapter.KEY_ROWID)));
+				id = Long.valueOf(str_id).longValue();
 				String lat = cursor.getString(cursor
 						.getColumnIndexOrThrow(NotesDbAdapter.KEY_LAT));
 				String lon = (cursor.getString(cursor
@@ -316,7 +250,7 @@ public class NotesDbAdapter {
 					double dlon = Double.parseDouble(lon);
 					ll = new LatLng(dlat, dlon);
 					// when we got ll we must add to container
-					EventInfo eventInfo = new EventInfo(ll, title, details);
+					EventInfo eventInfo = new EventInfo(ll, title, details, id);
 					allEventInfo.add(eventInfo);
 				}
 			} catch (Exception ex) {
@@ -349,15 +283,5 @@ public class NotesDbAdapter {
 
 		// One more parameter is added for data
 		return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
-	}
-
-	public double round(double value, int places) {
-		if (places < 0)
-			throw new IllegalArgumentException();
-
-		long factor = (long) Math.pow(10, places);
-		value = value * factor;
-		long tmp = Math.round(value);
-		return (double) tmp / factor;
 	}
 }

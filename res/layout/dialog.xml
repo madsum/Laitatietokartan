@@ -2,18 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
  android:layout_width="wrap_content" android:layout_height="wrap_content">
   
- <ScrollView 
-    android:id="@+id/ScrollView01"
- 	android:layout_width="wrap_content"
- 	android:layout_height="200dp" >
+ <ScrollView android:id="@+id/ScrollView01"
+ android:layout_width="wrap_content" android:layout_below="@+id/ImageView01"
+ android:layout_height="200px">
  
- <TextView 
-    android:text="@+id/TextView01" 
-    android:id="@+id/DialogText"
- 	android:layout_width="wrap_content" 
- 	android:layout_height="wrap_content"
- 	android:textSize="22dp" />
+ <TextView android:text="" android:id="@+id/DialogText"
+ android:layout_width="wrap_content" android:layout_height="wrap_content" />
  
  </ScrollView>
-  
+ 
+ <Button android:id="@+id/delted_note" android:layout_below="@id/ScrollView01"
+ android:layout_width="wrap_content" android:layout_height="wrap_content"
+ android:layout_centerHorizontal="true" android:text="@string/poistaa_tietoja" />
+ 
+  <Button android:id="@+id/modify_note" android:layout_below="@+id/delted_note"
+ android:layout_width="wrap_content" android:layout_height="wrap_content"
+ android:layout_centerHorizontal="true" android:text="muokata tietoja" />
+ 
 </RelativeLayout>

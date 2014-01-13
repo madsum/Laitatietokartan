@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
-    
-        <Button
-            android:id="@+id/curr_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.375"
-            android:text="@string/nykyinen_sijainti" />
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_gray_land">
 
-        <Button
-            android:id="@+id/all_note"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.375"
-            android:text="kaikki tieto" />
-        
-        
-        <Button
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.375"
-            android:text="Lähetä tiedot" />
+       <RelativeLayout  
+                 android:layout_width="fill_parent" 
+                 android:layout_height="wrap_content" 
+                 android:gravity="right"
+                 android:orientation="vertical"
+                 android:layout_below="@+id/logoLayout"> 
+                 
+                <Button android:id="@+id/curr_map"
+                        android:layout_height="100dp" 
+                        android:layout_width="500dp" 
+                        android:text="@string/nykyinen_sijainti"
+                        android:background="#808080" 
+                        android:textSize="60dp"
+                        android:textColor="#ffffff"
+                        android:layout_marginTop="130dp">
+                </Button> 
 
-</LinearLayout>
+                <Button android:id="@+id/all_note"
+                        android:layout_height="100dp" 
+                        android:layout_width="500dp"
+                        android:text="@string/kaikki_tieto"
+                        android:background="#808080" 
+                        android:textSize="60dp"
+                        android:textColor="#ffffff"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/curr_map">
+                </Button>
+
+                <Button android:id="@+id/email"
+                        android:layout_height="100dp" 
+                        android:layout_width="500dp" 
+                        android:text="@string/laheta_tiedot"
+                        android:background="#808080" 
+                        android:textSize="60dp"
+                        android:textColor="#ffffff"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/all_note">
+                </Button>
+
+   
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>

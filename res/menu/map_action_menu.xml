@@ -6,10 +6,9 @@
           android:title="@string/nykyinen_sijainti"
           android:showAsAction="ifRoom"/>
  
-
-  <item android:id="@+id/all_marker"
-          android:icon="@drawable/ic_action_select_all"
-          android:title="@string/kaikki sijainti"
+  <item android:id="@+id/location_foundd"
+          android:icon="@drawable/ic_launcher"
+          android:title="@string/nykyinen_sijainti"
           android:showAsAction="ifRoom"/>
 
 <item android:id="@+id/edit"

@@ -15,9 +15,16 @@
     <string name="poistaa_tietoja">poistaa tietoja</string>
     <string name="title_activity_note_list">NoteList</string>
     <string name="title_activity_email">Lähetä sähköpostia</string>
-    <string name="kaikki_tieto">kaikki tieto</string>
+    <string name="kaikki_tieto">Kaikki tieto</string>
     <string name="muokata">muokata</string>
     <string name="n_yt_kartta">näytä kartta</string>
     <string name="nayta_kartta">näytä kartta</string>
+    <string name="kaikki_sijainti">kaikki sijainti</string>
+    <string name="laheta_tiedot">Lähetä tiedot</string>
+    <string name="poista_merkki">Poista merkki</string>
+    <string name="laittaa_tietoa">Laittaa tietoa</string>
+    <string name="muokka_tietoja">Muokka tietoja</string>
+    <string name="laittaa_uusi_muistion">Laittaa uusi muistion</string>
+    <string name="virkistaa">virkistää</string>
 
 </resources>

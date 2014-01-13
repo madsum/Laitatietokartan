@@ -45,15 +45,12 @@ public class Email extends Activity {
     
 	private void fillData() {
         Cursor notesCursor = mDbHelper.fetchAllNotes();
-        //startManagingCursor(notesCursor);
         int count = 1;
         while( notesCursor.moveToNext() )
         {
         	String title = notesCursor.getString(notesCursor.getColumnIndex(mDbHelper.KEY_TITLE));
         	String body = notesCursor.getString(notesCursor.getColumnIndex(mDbHelper.KEY_BODY));
-        	String lat = notesCursor.getString(notesCursor.getColumnIndex(mDbHelper.KEY_LAT));
-        	String lng = notesCursor.getString(notesCursor.getColumnIndex(mDbHelper.KEY_LNG));
-        	msg += Integer.toString(count) + " "+ "otsikko: " +  title + " " + "tiedot: " + body + "Lat: "+lat+ "Lng: "+lng+ "\n";
+        	msg += Integer.toString(count) + " "+ "otsikko: " +  title + " " + "tiedot: " + body + "\n";
         	count++;
         }
     }

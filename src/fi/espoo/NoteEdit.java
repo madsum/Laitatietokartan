@@ -99,6 +99,8 @@ public class NoteEdit extends Activity {
 	}
 
 	public static class LineEditText extends EditText {
+		private Rect mRect;
+		private Paint mPaint;
 		// we need this constructor for LayoutInflater
 		public LineEditText(Context context, AttributeSet attrs) {
 			super(context, attrs);
@@ -107,9 +109,6 @@ public class NoteEdit extends Activity {
 			mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 			mPaint.setColor(Color.BLUE);
 		}
-
-		private Rect mRect;
-		private Paint mPaint;
 
 		@Override
 		protected void onDraw(Canvas canvas) {
@@ -134,7 +133,6 @@ public class NoteEdit extends Activity {
 
 				super.onDraw(canvas);
 			}
-
 		}
 	}
 
@@ -148,7 +146,6 @@ public class NoteEdit extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		//saveState();
 	}
 
 	@Override
@@ -177,17 +174,14 @@ public class NoteEdit extends Activity {
 				mDbHelper.deleteNote(mRowId);
 			}
 			finish();
-
 			return true;
 		case R.id.save:
-
 			saveState();
 			finish();
 
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-
 	}
 
 	private void saveState() {
@@ -198,7 +192,6 @@ public class NoteEdit extends Activity {
 
 		if (mRowId == null || mRowId == 0) {
 			long id = mDbHelper.createNote(title, body, curDate, lat, lon);
-			//long id = mDbHelper.createNote2(title, body, curDate);
 			if (id > 0) {
 				mRowId = id;
 			} else {
@@ -209,23 +202,13 @@ public class NoteEdit extends Activity {
 				Log.e("saveState", "failed to update note");
 			}
 		}
-
 		Intent intent = new Intent(this, NoteList.class);
-		/*
-		//LocationInfo lacationInfo = Location.getLocation();
-		Intent intent = new Intent(this, MapActivity.class);
-		Bundle b = new Bundle();
-		b.putDouble("lat", Location.getlatitude());
-		b.putDouble("lon", Location.getlongitude());
-		intent.putExtras(b);
-		*/
 		startActivity(intent);
 	}
 
 	private void populateFields() {
 		if (mRowId != null && mRowId != 0 ) {
 			note = mDbHelper.fetchNote(mRowId);
-			//startManagingCursor(note);
 			mTitleText.setText(note.getString(note
 					.getColumnIndexOrThrow(NotesDbAdapter.KEY_TITLE)));
 			mBodyText.setText(note.getString(note
@@ -233,7 +216,5 @@ public class NoteEdit extends Activity {
 			curText = note.getString(note
 					.getColumnIndexOrThrow(NotesDbAdapter.KEY_BODY));
 		}
-	}
-	
-
+	}	
 }
