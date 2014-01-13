@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg_gray_port">
+    android:background="@drawable/bg_gray_land">
 
        <RelativeLayout  
                  android:layout_width="fill_parent" 
                  android:layout_height="wrap_content" 
-                 android:gravity="center"
+                 android:gravity="right"
                  android:orientation="vertical"
                  android:layout_below="@+id/logoLayout"> 
                  
@@ -18,8 +18,7 @@
                         android:background="#808080" 
                         android:textSize="60dp"
                         android:textColor="#ffffff"
-                        android:layout_marginTop="250dp"
-                        >
+                        android:layout_marginTop="200dp">
                 </Button> 
 
                 <Button android:id="@+id/all_note"

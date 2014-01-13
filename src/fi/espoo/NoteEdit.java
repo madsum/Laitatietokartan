@@ -186,6 +186,10 @@ public class NoteEdit extends Activity {
 
 	private void saveState() {
 		String title = mTitleText.getText().toString();
+		if(title.isEmpty())
+		{
+			title = "ei otsikkoa";
+		}
 		String body = mBodyText.getText().toString();
 		String lat = String.valueOf(position.latitude);
 		String lon = String.valueOf(position.longitude);

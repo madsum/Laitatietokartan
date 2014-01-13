@@ -47,6 +47,7 @@ public class MapActivity extends FragmentActivity implements OnMapClickListener,
 	TextView add_note;
 	TextView edit_note;
 	Marker selectedMarker = null;
+	Marker markOnCurrentPosition = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,12 @@ public class MapActivity extends FragmentActivity implements OnMapClickListener,
 			{
 				if(currentLocation)
 				{
+					if(markOnCurrentPosition != null)
+					{
+						markOnCurrentPosition.remove();
+						markOnCurrentPosition = null;
+						
+					}
 					marker = googleMap.addMarker(new MarkerOptions().position(position).icon(
 							BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
 							.title("nykyinen sijainti"));					
@@ -129,6 +136,7 @@ public class MapActivity extends FragmentActivity implements OnMapClickListener,
 					marker = googleMap.addMarker(new MarkerOptions().position(position).icon(
 							BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
 							.title(allEventInfo.get(i).getInfo()));
+					markOnCurrentPosition = marker;
 				}
 				
 				CameraPosition cameraPosition = new CameraPosition.Builder()
